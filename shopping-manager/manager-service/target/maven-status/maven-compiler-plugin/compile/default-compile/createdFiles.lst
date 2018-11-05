@@ -1,0 +1,5 @@
+com\shopping\service\impl\ContentServiceImpl.class
+com\shopping\service\impl\ItemCatServiceImpl.class
+com\shopping\service\impl\ItemDescServiceImpl.class
+com\shopping\service\impl\ContentCategoryServiceImpl.class
+com\shopping\service\impl\ItemServiceImpl.class
