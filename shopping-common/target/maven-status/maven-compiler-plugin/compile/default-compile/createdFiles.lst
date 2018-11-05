@@ -1,0 +1,11 @@
+com\shopping\common\jedis\JedisClientPool.class
+com\shopping\common\utils\StatusEnum.class
+com\shopping\common\jedis\JedisClientCluster.class
+com\shopping\common\utils\FtpUtil.class
+com\shopping\common\pojo\EasyUITreeNode.class
+com\shopping\common\utils\ShoppingResult.class
+com\shopping\common\jedis\JedisClient.class
+com\shopping\common\utils\StringUtils.class
+com\shopping\common\pojo\EasyUIDataGridResult.class
+com\shopping\common\utils\IDUtils.class
+com\shopping\common\utils\JsonUtils.class
