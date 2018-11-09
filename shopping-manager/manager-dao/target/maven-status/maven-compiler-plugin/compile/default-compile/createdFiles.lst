@@ -4,8 +4,9 @@ com\shopping\mapper\TbItemParamItemMapper.class
 com\shopping\mapper\TbItemDescMapper.class
 com\shopping\mapper\TbOrderItemMapper.class
 com\shopping\mapper\TbUserMapper.class
-com\shopping\mapper\TbContentMapper.class
-com\shopping\mapper\TbItemParamMapper.class
 com\shopping\mapper\TbOrderMapper.class
 com\shopping\mapper\TbOrderShippingMapper.class
+com\shopping\mapper\SearchDao.class
 com\shopping\mapper\TbContentCategoryMapper.class
+com\shopping\mapper\TbContentMapper.class
+com\shopping\mapper\TbItemParamMapper.class

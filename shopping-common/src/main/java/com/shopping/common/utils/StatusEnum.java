@@ -5,6 +5,7 @@ public enum StatusEnum {
     ERROR(1,"ERROR"),
     MYSQL_ERROR(2001,"数据库操作失败"),
     DELETE_NODE_ERROR(2002,"该节点不是叶子节点，无法删除"),//业务逻辑失误
+    SOLR_ERROR(2005,"导入solr失败"),
     NEED_LOGIN(10,"NEED_LOGIN"),
     ILLEGAL_ARGUMENT(2,"ILLEGAL_ARGUMENT");
 

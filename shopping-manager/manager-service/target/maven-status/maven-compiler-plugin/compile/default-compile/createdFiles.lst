@@ -1,5 +1,8 @@
 com\shopping\service\impl\ContentServiceImpl.class
 com\shopping\service\impl\ItemCatServiceImpl.class
+com\shopping\service\impl\SearchItemServiceImpl.class
 com\shopping\service\impl\ItemDescServiceImpl.class
 com\shopping\service\impl\ContentCategoryServiceImpl.class
+com\shopping\service\impl\SearchServiceImpl.class
 com\shopping\service\impl\ItemServiceImpl.class
+com\shopping\search\dao\SearchDao.class

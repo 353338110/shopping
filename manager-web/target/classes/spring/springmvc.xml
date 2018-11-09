@@ -47,5 +47,6 @@
     <dubbo:reference interface="com.shopping.service.ItemDescService" id="itemDescService" />
     <dubbo:reference interface="com.shopping.service.ContentCategoryService" id="contentCategoryService" />
     <dubbo:reference interface="com.shopping.service.ContentService" id="contentService" />
+    <dubbo:reference interface="com.shopping.service.SearchItemService" id="searchItemService" />
 
 </beans>
