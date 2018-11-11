@@ -1,7 +1,6 @@
 package com.shopping.service.impl;
 
 
-import com.github.miemiedev.mybatis.paginator.domain.Order;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shopping.common.pojo.EasyUIDataGridResult;
@@ -17,8 +16,12 @@ import com.shopping.pojo.TbItemExample;
 import com.shopping.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.jms.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +35,12 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private TbItemDescMapper itemDescMapper;
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @Resource
+    private Destination topicDestination;
 
     @Override
     public TbItem getItemById(long itemId) {
@@ -76,8 +85,17 @@ public class ItemServiceImpl implements ItemService {
         List<Long> longs = StringUtils.getIDsListByStr(ids);
         int result = itemMapper.deleteByMultiPrimaryKey(longs);;
         if (result>0){
+            //发送商品消息到activeMQ
+            jmsTemplate.send(topicDestination, new MessageCreator() {
+                @Override
+                public Message createMessage(Session session) throws JMSException {
+                    TextMessage textMessage = session.createTextMessage(""+StringUtils.DELETE+ids);
+                    return textMessage;
+                }
+            });
             return ShoppingResult.ok();
         }
+
         return new ShoppingResult(StatusEnum.MYSQL_ERROR.getCode(),StatusEnum.MYSQL_ERROR.getDesc(),null);
     }
 
@@ -110,15 +128,24 @@ public class ItemServiceImpl implements ItemService {
         tbItemDesc.setItemDesc(desc);
         int result2 = itemDescMapper.updateByPrimaryKeySelective(tbItemDesc);
         if ((result1>0 && result2>0)){
+            //发送商品消息到activeMQ
+            jmsTemplate.send(topicDestination, new MessageCreator() {
+                @Override
+                public Message createMessage(Session session) throws JMSException {
+                    TextMessage textMessage = session.createTextMessage(""+StringUtils.UPDATE+tbItem.getId());
+                    return textMessage;
+                }
+            });
             return ShoppingResult.ok();
         }
+
         return new ShoppingResult(StatusEnum.MYSQL_ERROR.getCode(),StatusEnum.MYSQL_ERROR.getDesc(),null);
     }
 
 
     @Override
     public ShoppingResult addItem(TbItem tbItem, String desc) {
-        Long itemId = IDUtils.genItemId();
+        final Long itemId = IDUtils.genItemId();
         tbItem.setId(itemId);
         //1-正常 2-下架 3-删除(未知)
         tbItem.setStatus((byte)1);
@@ -134,6 +161,15 @@ public class ItemServiceImpl implements ItemService {
         itemDesc.setCreated(new Date());
         itemDesc.setUpdated(new Date());
         itemDescMapper.insert(itemDesc);
+
+        //发送商品添加消息
+        jmsTemplate.send(topicDestination, new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                TextMessage textMessage = session.createTextMessage(""+StringUtils.ADD+itemId );
+                return textMessage;
+            }
+        });
         return ShoppingResult.ok();
     }
 }

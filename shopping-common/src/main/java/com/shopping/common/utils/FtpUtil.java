@@ -15,7 +15,7 @@ import java.util.List;
 
 @Slf4j
 public class FtpUtil {
-    public static String host="192.168.2.244";
+    public static String host="127.0.0.1";
     private static final int port=21;
     private static final String username="";
     private static final String password="";

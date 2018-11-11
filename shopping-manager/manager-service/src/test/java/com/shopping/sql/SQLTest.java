@@ -2,6 +2,7 @@ package com.shopping.sql;
 
 import com.shopping.mapper.TbContentCategoryMapper;
 import com.shopping.pojo.TbContentCategory;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,8 +13,11 @@ public class SQLTest {
 
     @Test
     public void sqlTest() throws Exception{
+        int x = 1;
+        long y = 1599999;
+        System.out.println(""+x+y);
         //初始化spring容器
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-dao.xml");
+        //ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-dao.xml");
         //从容器中获得Mapper代理对象
         //TbItemMapper itemMapper = applicationContext.getBean(TbItemMapper.class);
         /*itemMapper.deleteByPrimaryKey(new Long("154112600888295"));*/
