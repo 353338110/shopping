@@ -3,6 +3,7 @@ package com.shopping.service;
 import com.shopping.common.pojo.EasyUIDataGridResult;
 import com.shopping.common.utils.ShoppingResult;
 import com.shopping.pojo.TbItem;
+import com.shopping.pojo.TbItemDesc;
 
 public interface ItemService {
 
@@ -19,4 +20,6 @@ public interface ItemService {
     ShoppingResult reshelf(String ids);
 
     ShoppingResult updateItem(TbItem tbItem, String desc);
+
+    TbItemDesc getItemDescById(long itemId);
 }

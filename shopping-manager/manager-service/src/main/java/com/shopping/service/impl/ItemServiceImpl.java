@@ -44,20 +44,11 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public TbItem getItemById(long itemId) {
-        log.info("------------ItemServiceImpl itemId = "+itemId );
         TbItemExample example = new TbItemExample();
         TbItemExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(itemId);
         List<TbItem> list = new ArrayList<TbItem>();
-        try {
-            System.out.println("begin------------");
-            list = itemMapper.selectByExample(example);
-            System.out.println("end------------");
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            System.out.println("finally-----------");
-        }
+        list = itemMapper.selectByExample(example);
 
         if (list!=null && list.size()>0){
             return list.get(0);
@@ -140,6 +131,12 @@ public class ItemServiceImpl implements ItemService {
         }
 
         return new ShoppingResult(StatusEnum.MYSQL_ERROR.getCode(),StatusEnum.MYSQL_ERROR.getDesc(),null);
+    }
+
+    @Override
+    public TbItemDesc getItemDescById(long itemId) {
+        TbItemDesc itemDesc = itemDescMapper.selectByPrimaryKey(itemId);
+        return itemDesc;
     }
 
 
